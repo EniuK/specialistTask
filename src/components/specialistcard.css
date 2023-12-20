@@ -1,0 +1,62 @@
+.card-wrapper {
+   
+    min-width: 370px;
+  max-width: 25%;
+}
+
+.specialist-card {
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0px 3px 13px 0 rgba(231, 234, 247, 0.35);
+    padding: 20px 20px 0;
+}
+
+.card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0 27px 
+}
+
+.name-specialization-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.specialist-name {
+
+    margin: 27px 0 11px 0;
+    font-family: OpenSans;
+    font-size: 19px;
+    font-weight: 600;
+    font-stretch: normal;
+  
+
+    color: #0f1d38;
+}
+
+.specialization {
+  
+    margin: 0 0 47px ;
+    font-family: OpenSans;
+    font-size: 14px;
+
+ 
+opacity: 0.6;
+}
+
+.icons-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
