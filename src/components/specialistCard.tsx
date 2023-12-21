@@ -1,6 +1,16 @@
 import datas from "../modules/specialistsData.json";
 import "./specialistcard.css";
-const SpecialistCard = () => {
+import { Specialist } from "../redux/types";
+import { useEffect, useState } from "react";
+
+const SpecialistCard = (specialist: Specialist) => {
+  //   const [bstars, setBstars] = useState();
+  //   const [gstars, setGstars] = useState();
+  const arr = [1, 2, 3, 4, 5];
+  const data = specialist.specialist;
+
+  useEffect(() => {}, [data]);
+
   return (
     <div className="card-wrapper">
       <div className="specialist-card">
@@ -9,7 +19,15 @@ const SpecialistCard = () => {
             <img src="./more.png" alt="more" />
           </div>
           <div className="heart-img">
-            <img src="./heart.png" alt="heart" />
+            {data.isFav ? (
+              <img src="./heart.png" alt="heart" />
+            ) : (
+              <img
+                src="./hearth.png"
+                alt="heart"
+                style={{ width: "26px", height: "23px" }}
+              />
+            )}
           </div>
         </div>
         <div className="image-wrapper">
@@ -18,8 +36,8 @@ const SpecialistCard = () => {
           </div>
         </div>
         <div className="name-specialization-wrapper">
-          <div className="specialist-name">erica morickson</div>
-          <div className="specialization">optican</div>
+          <div className="specialist-name">{data.name}</div>
+          <div className="specialization">{data.specialty}</div>
         </div>
         <div className="icons-wrapper">
           <div>
@@ -32,8 +50,31 @@ const SpecialistCard = () => {
             <img src="message.png" alt="message" />
           </div>
         </div>
-        <div className="stars-rating-wrapper"></div>
-        <div className="card-footer"></div>
+        <div className="stars-rating-wrapper">
+          <div className="stars-rating">
+            {arr.map((e: any) => {
+              //   console.log(data.rating);
+              //   console.log(data + "hejka");
+              if (e > data.rating) {
+                return <img src="./star-gray.png" alt="gStar" />;
+              } else {
+                return <img src="./star-blue-kopia.png" alt="bStar" />;
+              }
+            })}
+          </div>
+          <div className="average-rating">
+            <div className="avrg">{data.rating}</div>
+            <div className="num-of-votes">
+              {"("}
+              {data.numOfRatings}
+              {")"}
+            </div>
+          </div>
+        </div>
+        <div className="card-footer">
+          <div className={"footer-child footer-profil"}>PROFIL</div>
+          <div className={"footer-child footer-book"}>BOOK A VISIT</div>
+        </div>
       </div>
     </div>
   );

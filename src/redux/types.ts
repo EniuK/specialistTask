@@ -6,4 +6,5 @@ export interface Specialist {
   rating: number;
   imgsrc: string;
   isFav: boolean;
+  numOfRatings: number;
 }

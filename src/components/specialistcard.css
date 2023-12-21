@@ -2,13 +2,15 @@
    
     min-width: 370px;
   max-width: 25%;
+  padding: 20px 20px ;
+
 }
 
 .specialist-card {
     width: 100%;
     border-radius: 4px;
     box-shadow: 0px 3px 13px 0 rgba(231, 234, 247, 0.35);
-    padding: 20px 20px 0;
+
 }
 
 .card-header {
@@ -16,13 +18,14 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: 20px 20px ;
 }
 
 .image-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 15px 0 27px 
+    margin: 15px 0 0
 }
 
 .name-specialization-wrapper {
@@ -59,4 +62,54 @@ opacity: 0.6;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+}
+.stars-rating-icons {
+    margin-right: 7px;
+}
+.stars-rating-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 41px 60px 31px;
+}
+.avrg {
+  
+    margin-bottom: 8px;
+    font-family: "OpenSans";
+    font-size: 30px;
+    font-weight: 600;
+
+    text-align: center;
+    color: #0f1d38;
+  
+}
+
+.num-of-votes {
+  
+    font-family: "OpenSans";
+    font-size: 12px;
+  
+    text-align: center;
+    color: #a2a8c1;
+}
+.card-footer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-child { 
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #a2a8c1;
+    letter-spacing: 0.24px;
+    font-family: "OpenSans";
+    font-size: 12px;
+    border: 1px solid #f2f4f6;
+    padding: 25px 0;
 }
