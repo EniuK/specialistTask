@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import SpecialistCard from "./specialistCard";
 import { useSelector } from "react-redux";
 import { selectSpecialists } from "../redux/specialistsReducer";
@@ -8,13 +8,16 @@ const Main = () => {
   const allSpecialists = useSelector(selectSpecialists);
   const [favFilter, setFavFilter] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const filteredSpecialists = allSpecialists.filter((specialist: any) => {
-    const nameIncludesSearchText = specialist.name
-      .toLowerCase()
-      .includes(searchText.toLowerCase());
-    const isFavMatch = favFilter ? specialist.isFav : true;
-    return nameIncludesSearchText && isFavMatch;
-  });
+
+  const filteredSpecialists = useMemo(() => {
+    return allSpecialists.filter((specialist: any) => {
+      const nameIncludesSearchText = specialist.name
+        .toLowerCase()
+        .includes(searchText.toLowerCase());
+      const isFavMatch = favFilter ? specialist.isFav : true;
+      return nameIncludesSearchText && isFavMatch;
+    });
+  }, [allSpecialists, favFilter, searchText]);
 
   return (
     <div
@@ -64,6 +67,11 @@ const Main = () => {
             className="input-filter"
             type="text"
             placeholder="Search..."
+            style={{
+              background: "url('./loupe.png') no-repeat 10px center",
+              backgroundSize: "24px 24px",
+              paddingLeft: "40px",
+            }}
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />

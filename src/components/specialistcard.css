@@ -63,6 +63,7 @@ opacity: 0.6;
     justify-content: space-evenly;
     align-items: center;
 }
+
 .stars-rating-icons {
     margin-right: 7px;
 }
@@ -118,4 +119,35 @@ opacity: 0.6;
     background-color: #3540ff;
     color: #fff; 
     cursor: pointer;
+  }
+
+  .bell-hovered {
+    width: 103px;
+    height: 3px;
+    background-color: #3540ff
+  }
+
+  .message-hovered {
+    width: 103px;
+    height: 3px;
+    background-color: #3540ff
+  }
+
+  .calendar-hovered {
+    width: 103px;
+    height: 3px;
+    background-color: #3540ff
+  }
+
+  .unhovered {
+    width: 103px;
+    height: 3px;
+    background-color: transparent;
+  }
+
+  .icon-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
