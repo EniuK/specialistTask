@@ -113,3 +113,9 @@ opacity: 0.6;
     border: 1px solid #f2f4f6;
     padding: 25px 0;
 }
+
+.footer-child:hover {
+    background-color: #3540ff;
+    color: #fff; 
+    cursor: pointer;
+  }

@@ -1,13 +1,21 @@
-// specialistsReducer.ts
+// redux/specialistsSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Specialist } from "./types";
+import special from "../modules/specialistsData.json";
+
+interface Specialist {
+  id: number;
+  name: string;
+  specialty: string;
+  rating: number;
+  isFav: boolean;
+}
 
 interface SpecialistsState {
   specialists: Specialist[];
 }
 
 const initialState: SpecialistsState = {
-  specialists: [], // Tutaj umieść swoją listę 4000 specjalistów
+  specialists: special,
 };
 
 const specialistsSlice = createSlice({
@@ -36,5 +44,7 @@ const specialistsSlice = createSlice({
 });
 
 export const { rateSpecialist, toggleFavorite } = specialistsSlice.actions;
+
+export const selectSpecialists = (state: any) => state.specialists.specialists;
 
 export default specialistsSlice.reducer;

@@ -4,7 +4,7 @@ import Main from "./components/main";
 function App() {
   const [data, setData] = useState<any[]>([]);
 
-  console.log(datas);
+  // console.log(datas);
   return (
     <div className="App">
       <Main />

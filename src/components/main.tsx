@@ -1,40 +1,62 @@
+import React, { useState } from "react";
 import SpecialistCard from "./specialistCard";
-
+import { useSelector } from "react-redux";
+import { selectSpecialists } from "../redux/specialistsReducer";
+import "./main.css";
 const Main = () => {
-  const helpData = [
-    {
-      id: 1,
-      name: "Abraham Thompson",
-      specialty: "dentist",
-      rating: 4,
-      imgsrc: "./specialist1",
-      isFav: false,
-      numOfRatings: 79,
-    },
-    {
-      id: 2,
-      name: "Efren Dickinson",
-      specialty: "dentist",
-      rating: 4,
-      imgsrc: "./specialist1",
-      isFav: false,
-      numOfRatings: 54,
-    },
-    {
-      id: 3,
-      name: "Stephania Boyle",
-      specialty: "oncologist",
-      rating: 3,
-      imgsrc: "./specialist3",
-      isFav: false,
-      numOfRatings: 23,
-    },
-  ];
+  const specialists = useSelector(selectSpecialists);
+  const [favFilter, setFavFilter] = useState(false);
+  const [filter, setFilter] = useState("");
+  const handleChange = (e: any) => {
+    setFilter(e);
+  };
   return (
-    <div style={{ width: "100vw" }}>
-      {helpData.map((e: any) => {
-        return <SpecialistCard specialist={e} />;
-      })}
+    <div
+      style={{
+        width: "100vw",
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <div>{favFilter ? "Favorite specialists (4)" : "Specialists "}</div>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <div
+            className={`filter fav-filter ${favFilter ? "active-filter" : ""}`}
+            style={{
+              backgroundColor: favFilter ? "#3540ff" : "transparent",
+              color: favFilter ? "white" : "black",
+            }}
+            onClick={() => setFavFilter(true)}
+          >
+            All favorite
+          </div>
+          <div
+            className={`filter all-filter ${!favFilter ? "active-filter" : ""}`}
+            style={{
+              backgroundColor: !favFilter ? "#3540ff" : "transparent",
+              color: !favFilter ? "white" : "black",
+            }}
+            onClick={() => setFavFilter(false)}
+          >
+            My specialists
+          </div>
+        </div>
+        <div>
+          <input type="text" onChange={(e: any) => handleChange(e)} />
+        </div>
+      </div>
+      {specialists.map((specialist: any) => (
+        <SpecialistCard key={specialist.id} specialist={specialist} />
+      ))}
     </div>
   );
 };

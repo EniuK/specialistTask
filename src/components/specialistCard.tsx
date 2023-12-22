@@ -1,31 +1,40 @@
-import datas from "../modules/specialistsData.json";
 import "./specialistcard.css";
-import { Specialist } from "../redux/types";
-import { useEffect, useState } from "react";
 
-const SpecialistCard = (specialist: Specialist) => {
-  //   const [bstars, setBstars] = useState();
-  //   const [gstars, setGstars] = useState();
+import { useDispatch, useSelector } from "react-redux";
+import {
+  rateSpecialist,
+  toggleFavorite,
+  selectSpecialists,
+} from "../redux/specialistsReducer";
+import { useEffect } from "react";
+
+const SpecialistCard = (specialist: any) => {
   const arr = [1, 2, 3, 4, 5];
   const data = specialist.specialist;
-
-  useEffect(() => {}, [data]);
-
+  const dispatch = useDispatch();
+  useEffect(() => {}, [specialist.specialist.isFav]);
+  const handleHeartClick = () => {
+    dispatch(toggleFavorite(specialist.specialist.id));
+  };
+  const handleRateClick = (rating: number) => {
+    dispatch(rateSpecialist({ id: specialist.specialist.id, rating }));
+  };
   return (
     <div className="card-wrapper">
-      <div className="specialist-card">
+      <div className="specialist-card" key={specialist.id}>
         <div className="card-header">
           <div className="more-img">
             <img src="./more.png" alt="more" />
           </div>
           <div className="heart-img">
-            {data.isFav ? (
-              <img src="./heart.png" alt="heart" />
+            {specialist.specialist.isFav ? (
+              <img src="./heart.png" alt="heart" onClick={handleHeartClick} />
             ) : (
               <img
                 src="./hearth.png"
                 alt="heart"
                 style={{ width: "26px", height: "23px" }}
+                onClick={handleHeartClick}
               />
             )}
           </div>
@@ -53,8 +62,6 @@ const SpecialistCard = (specialist: Specialist) => {
         <div className="stars-rating-wrapper">
           <div className="stars-rating">
             {arr.map((e: any) => {
-              //   console.log(data.rating);
-              //   console.log(data + "hejka");
               if (e > data.rating) {
                 return <img src="./star-gray.png" alt="gStar" />;
               } else {
