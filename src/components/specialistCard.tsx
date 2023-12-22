@@ -1,24 +1,27 @@
 import "./specialistcard.css";
 
-import { useDispatch, useSelector } from "react-redux";
-import {
-  rateSpecialist,
-  toggleFavorite,
-  selectSpecialists,
-} from "../redux/specialistsReducer";
+import { useDispatch } from "react-redux";
+import { toggleFavorite } from "../redux/specialistsReducer";
 import { useEffect } from "react";
 
 const SpecialistCard = (specialist: any) => {
   const arr = [1, 2, 3, 4, 5];
   const data = specialist.specialist;
   const dispatch = useDispatch();
+
   useEffect(() => {}, [specialist.specialist.isFav]);
+
   const handleHeartClick = () => {
+    console.log(data.isFav);
     dispatch(toggleFavorite(specialist.specialist.id));
   };
-  const handleRateClick = (rating: number) => {
-    dispatch(rateSpecialist({ id: specialist.specialist.id, rating }));
-  };
+
+  const nameParts = data.name.split(" ");
+  const initials = nameParts
+    .map((part: any) => part.charAt(0))
+    .join("")
+    .toUpperCase();
+
   return (
     <div className="card-wrapper">
       <div className="specialist-card" key={specialist.id}>
@@ -41,7 +44,26 @@ const SpecialistCard = (specialist: any) => {
         </div>
         <div className="image-wrapper">
           <div>
-            <img src="./specialist2.png" alt="specialist" />
+            {data.imgsrc == "./specialist2.png" ? (
+              <img src="./specialist2.png" alt="specialist" />
+            ) : (
+              <div
+                style={{
+                  width: "100px",
+                  height: "100px",
+                  backgroundColor: "#ffaf14",
+                  borderRadius: "50%",
+                  display: "flex",
+                  color: "black",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontSize: "25px",
+                  fontWeight: 600,
+                }}
+              >
+                {initials}
+              </div>
+            )}
           </div>
         </div>
         <div className="name-specialization-wrapper">

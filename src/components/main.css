@@ -5,4 +5,22 @@
 
   .filter {
     padding: 19px 52px;
+    color: #3540ff;
+  }
+
+  .filter-text {
+  
+
+    width: 33%;
+    font-size: 30px;
+    font-weight: 600;
+
+    text-align: left;
+    color: #0f1d38;
+  }
+
+  .active-filter {
+    background-color: #3540ff;
+    color: 
+    #cbd4fa;
   }
