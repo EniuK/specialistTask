@@ -2,36 +2,47 @@ import "./specialistcard.css";
 
 import { useDispatch } from "react-redux";
 import { toggleFavorite, rateSpecialist } from "../redux/specialistsReducer";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Specialist } from "../redux/types";
 
-const SpecialistCard = (specialist: any) => {
+const SpecialistCard: React.FC<{ specialist: Specialist }> = ({
+  specialist,
+}) => {
   const [grade, setGrade] = useState(true);
-  const [bellHover, setBellHover] = useState(false);
-  const [messageHover, setMessageHover] = useState(false);
-  const [callendarHover, setCallendarHover] = useState(false);
-  const arr = [1, 2, 3, 4, 5];
-  const data = specialist.specialist;
-  const dispatch = useDispatch();
+  const [hovered, setHovered] = useState({
+    bell: false,
+    calendar: false,
+    message: false,
+  });
 
-  useEffect(() => {}, [specialist.specialist.isFav]);
+  const [onMoreHover, setOnMoreHover] = useState(false);
+
+  const handleMouseOver = (icon: string) => {
+    setHovered((prevHovered) => ({ ...prevHovered, [icon]: true }));
+  };
+
+  const handleMouseOut = (icon: string) => {
+    setHovered((prevHovered) => ({ ...prevHovered, [icon]: false }));
+  };
+  const arr = [1, 2, 3, 4, 5];
+  const data = specialist;
+  const dispatch = useDispatch();
 
   const handleHeartClick = () => {
     console.log(data.isFav);
-    dispatch(toggleFavorite(specialist.specialist.id));
+    dispatch(toggleFavorite(specialist.id));
   };
 
   const handleStarClick = (newRte: number) => {
     if (grade) {
-      dispatch(
-        rateSpecialist({ id: specialist.specialist.id, rating: newRte })
-      );
+      dispatch(rateSpecialist({ id: specialist.id, rating: newRte }));
     }
     setGrade(false);
   };
 
   const nameParts = data.name.split(" ");
   const initials = nameParts
-    .map((part: any) => part.charAt(0))
+    .map((part: string) => part.charAt(0))
     .join("")
     .toUpperCase();
 
@@ -39,17 +50,24 @@ const SpecialistCard = (specialist: any) => {
     <div className="card-wrapper">
       <div className="specialist-card" key={specialist.id}>
         <div className="card-header">
-          <div className="more-img">
-            <img src="./more.png" alt="more" />
+          <div
+            className="more-img"
+            onMouseOver={() => setOnMoreHover(true)}
+            onMouseOut={() => setOnMoreHover(false)}
+          >
+            <img
+              src={onMoreHover ? "./more-blue.png" : "./more.png"}
+              alt="more"
+            />
           </div>
           <div className="heart-img">
-            {specialist.specialist.isFav ? (
+            {specialist.isFav ? (
               <img src="./heart.png" alt="heart" onClick={handleHeartClick} />
             ) : (
               <img
+                style={{ width: "26px", height: "23px" }}
                 src="./hearth.png"
                 alt="heart"
-                style={{ width: "26px", height: "23px" }}
                 onClick={handleHeartClick}
               />
             )}
@@ -57,7 +75,7 @@ const SpecialistCard = (specialist: any) => {
         </div>
         <div className="image-wrapper">
           <div>
-            {data.imgsrc == "./specialist2.png" ? (
+            {data.imgsrc === "./specialist2.png" ? (
               <img src="./specialist2.png" alt="specialist" />
             ) : (
               <div
@@ -84,67 +102,70 @@ const SpecialistCard = (specialist: any) => {
           <div className="specialization">{data.specialty}</div>
         </div>
         <div className="icons-wrapper">
-          <div className="icon-holder">
-            <img
-              src="./bell.png"
-              alt="bell"
-              onMouseOver={(e) => (
-                (e.currentTarget.src = "./bell-hover.png"), setBellHover(true)
-              )}
-              onMouseOut={(e) => (
-                (e.currentTarget.src = "./bell.png"), setBellHover(false)
-              )}
-            />
-
-            <div
-              style={{ width: "103px", height: "3px", marginTop: "20px" }}
-              className={bellHover ? "bell-hovered" : "unhovered"}
-            />
+          <div
+            className="icon-holder"
+            onMouseOver={() => handleMouseOver("bell")}
+            onMouseOut={() => handleMouseOut("bell")}
+          >
+            <div className="image-container">
+              <img
+                src={hovered.bell ? "./bell-hover.png" : "./bell.png"}
+                alt="bell"
+                className="icon-image"
+              />
+              <div
+                style={{ width: "103px", height: "3px", marginTop: "20px" }}
+                className={hovered.bell ? "bell-hovered" : "unhovered"}
+              />
+            </div>
           </div>
-          <div className="icon-holder">
-            <img
-              src="./calendar.png"
-              alt="calendar"
-              onMouseOver={(e) => (
-                (e.currentTarget.src = "./calendar-hover.png"),
-                setCallendarHover(true)
-              )}
-              onMouseOut={(e) => (
-                (e.currentTarget.src = "calendar.png"), setCallendarHover(false)
-              )}
-            />
-            <div
-              style={{ width: "103px", height: "3px", marginTop: "20px" }}
-              className={callendarHover ? "calendar-hovered" : "unhovered"}
-            />
+          <div
+            className="icon-holder"
+            onMouseOver={() => handleMouseOver("calendar")}
+            onMouseOut={() => handleMouseOut("calendar")}
+          >
+            <div className="image-container">
+              <img
+                src={
+                  hovered.calendar ? "./calendar-hover.png" : "./calendar.png"
+                }
+                alt="calendar"
+                className="icon-image"
+              />
+              <div
+                style={{ width: "103px", height: "3px", marginTop: "20px" }}
+                className={hovered.calendar ? "calendar-hovered" : "unhovered"}
+              />
+            </div>
           </div>
-          <div className="icon-holder">
-            <img
-              src="./message.png"
-              alt="message"
-              onMouseOver={(e) => (
-                (e.currentTarget.src = "./message-hover.png"),
-                setMessageHover(true)
-              )}
-              onMouseOut={(e) => (
-                (e.currentTarget.src = "./message.png"), setMessageHover(false)
-              )}
-            />
-            <div
-              style={{ width: "103px", height: "3px", marginTop: "20px" }}
-              className={messageHover ? "message-hovered" : "unhovered"}
-            />
+          <div
+            className="icon-holder"
+            onMouseOver={() => handleMouseOver("message")}
+            onMouseOut={() => handleMouseOut("message")}
+          >
+            <div className="image-container">
+              <img
+                src={hovered.message ? "./message-hover.png" : "./message.png"}
+                alt="message"
+                className="icon-image"
+              />
+              <div
+                style={{ width: "103px", height: "3px", marginTop: "20px" }}
+                className={hovered.message ? "message-hovered" : "unhovered"}
+              />
+            </div>
           </div>
         </div>
         <div className="stars-rating-wrapper">
           <div className="stars-rating">
-            {arr.map((e: any) => {
+            {arr.map((e: number) => {
               if (e <= data.rating) {
                 return (
                   <img
                     src="./star-blue-kopia.png"
                     alt="bStar"
                     onClick={() => handleStarClick(e)}
+                    style={{ marginRight: "9px" }}
                   />
                 );
               } else {
@@ -153,6 +174,7 @@ const SpecialistCard = (specialist: any) => {
                     src="./star-gray.png"
                     alt="gStar"
                     onClick={() => handleStarClick(e)}
+                    style={{ marginRight: "9px" }}
                   />
                 );
               }

@@ -6,6 +6,7 @@
   .filter {
     padding: 19px 52px;
     color: #3540ff;
+    background-color: #e2e4ec;
   }
 
   .filter-text {
@@ -14,7 +15,7 @@
     width: 33%;
     font-size: 30px;
     font-weight: 600;
-
+padding-left: 22px;
     text-align: left;
     color: #0f1d38;
   }

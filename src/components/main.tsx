@@ -1,16 +1,17 @@
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import SpecialistCard from "./specialistCard";
 import { useSelector } from "react-redux";
 import { selectSpecialists } from "../redux/specialistsReducer";
 import "./main.css";
+import { Specialist } from "../redux/types";
 
-const Main = () => {
+const Main: React.FC = () => {
   const allSpecialists = useSelector(selectSpecialists);
   const [favFilter, setFavFilter] = useState(false);
   const [searchText, setSearchText] = useState("");
 
   const filteredSpecialists = useMemo(() => {
-    return allSpecialists.filter((specialist: any) => {
+    return allSpecialists.filter((specialist: Specialist) => {
       const nameIncludesSearchText = specialist.name
         .toLowerCase()
         .includes(searchText.toLowerCase());
@@ -26,6 +27,7 @@ const Main = () => {
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
+        marginTop: "50px",
       }}
     >
       <div
@@ -77,7 +79,7 @@ const Main = () => {
           />
         </div>
       </div>
-      {filteredSpecialists.map((specialist: any) => (
+      {filteredSpecialists.map((specialist: Specialist) => (
         <SpecialistCard key={specialist.id} specialist={specialist} />
       ))}
     </div>

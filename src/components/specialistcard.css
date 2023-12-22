@@ -12,6 +12,10 @@
     box-shadow: 0px 3px 13px 0 rgba(231, 234, 247, 0.35);
 
 }
+.specialist-card:hover {
+cursor: pointer;
+border: 1px solid #3540ff;
+}
 
 .card-header {
     display: flex;
@@ -72,7 +76,14 @@ opacity: 0.6;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 41px 60px 31px;
+    padding: 11px 60px 31px;
+}
+
+.stars-rating {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 .avrg {
   
@@ -145,9 +156,24 @@ opacity: 0.6;
     background-color: transparent;
   }
 
-  .icon-holder {
+  .image-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    cursor: pointer;
+  }
+
+  .more-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 32px;
+
+  }
+
+  .more-img:hover {
+    border-radius: 4px;
+    background-color: #f3f5fc;
   }
